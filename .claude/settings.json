@@ -22,7 +22,14 @@
       "Bash(gh auth *)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(grep -Ei 'JOURNEY MASTER LTD.txt|\\\\.env$|passwords')"
+      "Bash(grep -Ei 'JOURNEY MASTER LTD.txt|\\\\.env$|passwords')",
+      "Bash(git commit -q -m 'Initial commit: PHP 8 MVC foundation + premium multi-page site *)",
+      "Bash(gh repo *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(php -r '$d=json_decode\\(stream_get_contents\\(STDIN\\),true\\); if\\($d\\) printf\\(\"name=%s visibility=%s branch=%s\\\\nurl=%s\\\\npushed=%s\\\\n\",$d[\"name\"],$d[\"visibility\"],$d[\"defaultBranchRef\"][\"name\"]??\"?\",$d[\"url\"],$d[\"pushedAt\"]\\); else echo \"repo not found\\\\n\";')",
+      "Bash(php -r 'echo file_get_contents\\(\".claude/settings.json\"\\);')",
+      "Bash(git commit *)"
     ]
   }
 }
