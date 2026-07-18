@@ -29,7 +29,8 @@
       "Bash(git push *)",
       "Bash(php -r '$d=json_decode\\(stream_get_contents\\(STDIN\\),true\\); if\\($d\\) printf\\(\"name=%s visibility=%s branch=%s\\\\nurl=%s\\\\npushed=%s\\\\n\",$d[\"name\"],$d[\"visibility\"],$d[\"defaultBranchRef\"][\"name\"]??\"?\",$d[\"url\"],$d[\"pushedAt\"]\\); else echo \"repo not found\\\\n\";')",
       "Bash(php -r 'echo file_get_contents\\(\".claude/settings.json\"\\);')",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(php -r '$d=json_decode\\(stream_get_contents\\(STDIN\\),true\\); printf\\(\"visibility=%s  branch=%s\\\\nHTTPS clone: %s.git\\\\n\",$d[\"visibility\"],$d[\"defaultBranchRef\"][\"name\"],$d[\"url\"]\\);')"
     ]
   }
 }

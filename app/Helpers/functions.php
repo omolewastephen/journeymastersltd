@@ -113,6 +113,30 @@ if (!function_exists('excerpt')) {
     }
 }
 
+if (!function_exists('site_base')) {
+    /** Absolute site base URL. Uses APP_URL when set to a real host, else derives
+     *  it from the request (with correct HTTPS detection behind cPanel proxies). */
+    function site_base(): string
+    {
+        $configured = (string) config('app.url');
+        if ($configured !== '' && !str_contains($configured, 'localhost') && !str_contains($configured, '127.0.0.1')) {
+            return rtrim($configured, '/');
+        }
+        $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https')
+            || (($_SERVER['SERVER_PORT'] ?? '') == 443);
+        $host = $_SERVER['HTTP_HOST'] ?? 'journeymastersltd.ng';
+        return ($https ? 'https' : 'http') . '://' . $host;
+    }
+}
+
+if (!function_exists('canonical_url')) {
+    function canonical_url(): string
+    {
+        return site_base() . strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+    }
+}
+
 if (!function_exists('whatsapp_url')) {
     /** Prefill a WhatsApp message where the click-to-chat link supports it. */
     function whatsapp_url(string $text = ''): string

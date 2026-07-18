@@ -38,7 +38,7 @@ final class PageController extends Controller
     public function sitemap(): void
     {
         header('Content-Type: application/xml; charset=utf-8');
-        $base  = rtrim(config('app.url') ?: (($_SERVER['REQUEST_SCHEME'] ?? 'https') . '://' . ($_SERVER['HTTP_HOST'] ?? 'journeymastersltd.com')), '/');
+        $base  = site_base();
         $urls  = ['/', '/about', '/services', '/destinations', '/blog', '/contact'];
         foreach (Content::services() as $s)     { $urls[] = '/services/' . $s['slug']; }
         foreach (Content::destinations() as $d) { $urls[] = '/destinations/' . $d['slug']; }
@@ -55,7 +55,7 @@ final class PageController extends Controller
     public function robots(): void
     {
         header('Content-Type: text/plain; charset=utf-8');
-        $base = rtrim(config('app.url') ?: (($_SERVER['REQUEST_SCHEME'] ?? 'https') . '://' . ($_SERVER['HTTP_HOST'] ?? 'journeymastersltd.com')), '/');
+        $base = site_base();
         echo "User-agent: *\nAllow: /\n\nSitemap: {$base}/sitemap.xml\n";
     }
 }

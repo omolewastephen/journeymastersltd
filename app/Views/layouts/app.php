@@ -12,7 +12,7 @@ $bodyClass    = $bodyClass ?? '';
   <meta name="description" content="<?= e($description) ?>" />
   <meta name="theme-color" content="#020255" />
   <link rel="icon" type="image/png" href="<?= asset('img/logo.png') ?>" />
-  <link rel="canonical" href="<?= e((($_SERVER['REQUEST_SCHEME'] ?? 'https') . '://' . ($_SERVER['HTTP_HOST'] ?? '') . ($_SERVER['REQUEST_URI'] ?? ''))) ?>" />
+  <link rel="canonical" href="<?= e(canonical_url()) ?>" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="<?= e($title) ?>" />
