@@ -6,10 +6,9 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Csrf;
-use App\Core\Database;
 use App\Core\Request;
 use App\Core\Session;
-use App\Repositories\Messages;
+use App\Repositories\Subscribers;
 
 final class NewsletterController extends Controller
 {
@@ -28,15 +27,7 @@ final class NewsletterController extends Controller
             $this->back();
         }
 
-        $row = ['email' => $email, 'ip' => $request->ip(), 'created_at' => date('Y-m-d H:i:s')];
-
-        $pdo = Database::connection();
-        if ($pdo !== null) {
-            $stmt = $pdo->prepare('INSERT IGNORE INTO subscribers (email, ip_address, created_at) VALUES (:email, :ip, :created_at)');
-            $stmt->execute($row);
-        } else {
-            Messages::appendSubscriber($row);
-        }
+        Subscribers::store($email, $request->ip());
 
         Session::flash('news_success', 'You\'re subscribed — welcome aboard!');
         $this->back();

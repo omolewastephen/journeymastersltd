@@ -16,3 +16,4 @@
 # OS / editor
 .DS_Store
 Thumbs.db
+/storage/*.sqlite

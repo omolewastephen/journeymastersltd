@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application configuration.
  * Values come from environment (.env) with safe production defaults.
@@ -18,7 +19,7 @@ return [
         'phone'      => '0707 171 2755',
         'phone_raw'  => '07071712755',
         'phone_intl' => '+2347071712755',
-        'whatsapp'   => 'https://wa.link/8k9dsz',
+        'whatsapp'   => 'https://wa.me/message/EZXCQI3Q2QWIC1',
         'facebook'   => 'https://facebook.com/profile.php?id=61564686459957',
         'email'      => 'info@journeymastersltd.com',
         'address'    => 'Abeokuta, Ogun State, Nigeria',
@@ -28,6 +29,8 @@ return [
     ],
 
     'db' => [
+        'connection'  => env('DB_CONNECTION', 'mysql'), // 'mysql' (prod) or 'sqlite' (local dev)
+        'sqlite_path' => env('DB_SQLITE_PATH', __DIR__ . '/../storage/dev.sqlite'),
         'host'    => env('DB_HOST', '127.0.0.1'),
         'port'    => env('DB_PORT', '3306'),
         'name'    => env('DB_NAME', 'journeymasters'),

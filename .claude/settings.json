@@ -30,7 +30,12 @@
       "Bash(php -r '$d=json_decode\\(stream_get_contents\\(STDIN\\),true\\); if\\($d\\) printf\\(\"name=%s visibility=%s branch=%s\\\\nurl=%s\\\\npushed=%s\\\\n\",$d[\"name\"],$d[\"visibility\"],$d[\"defaultBranchRef\"][\"name\"]??\"?\",$d[\"url\"],$d[\"pushedAt\"]\\); else echo \"repo not found\\\\n\";')",
       "Bash(php -r 'echo file_get_contents\\(\".claude/settings.json\"\\);')",
       "Bash(git commit *)",
-      "Bash(php -r '$d=json_decode\\(stream_get_contents\\(STDIN\\),true\\); printf\\(\"visibility=%s  branch=%s\\\\nHTTPS clone: %s.git\\\\n\",$d[\"visibility\"],$d[\"defaultBranchRef\"][\"name\"],$d[\"url\"]\\);')"
+      "Bash(php -r '$d=json_decode\\(stream_get_contents\\(STDIN\\),true\\); printf\\(\"visibility=%s  branch=%s\\\\nHTTPS clone: %s.git\\\\n\",$d[\"visibility\"],$d[\"defaultBranchRef\"][\"name\"],$d[\"url\"]\\);')",
+      "Bash(DB_CONNECTION=sqlite DB_ENABLED=true APP_DEBUG=true php -S 127.0.0.1:8020 -t public public/index.php)",
+      "Bash(pkill -f \"php -S 127.0.0.1:80\")",
+      "Read(//private/tmp/**)",
+      "Bash(DB_CONNECTION=sqlite DB_ENABLED=true APP_DEBUG=true QA_LOGIN=1 php -S 127.0.0.1:8030 -t public public/index.php)",
+      "Bash(grep -Ei 'dev\\\\.sqlite|\\\\.env$|messages\\\\.json|subscribers\\\\.json')"
     ]
   }
 }
