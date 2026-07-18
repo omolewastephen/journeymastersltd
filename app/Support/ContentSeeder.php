@@ -26,9 +26,13 @@ final class ContentSeeder
         $suffix = $sqlite ? '' : ' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4';
 
         // Drop legacy + content tables, then recreate with the new shape.
-        foreach (['service_features', 'galleries', 'post_categories', 'services', 'destinations', 'posts', 'testimonials', 'faqs'] as $t) {
+        // FK checks off so old foreign keys (e.g. posts→post_categories) don't
+        // block the drops; child tables are also listed before their parents.
+        Db::exec($sqlite ? 'PRAGMA foreign_keys = OFF' : 'SET FOREIGN_KEY_CHECKS = 0');
+        foreach (['service_features', 'galleries', 'posts', 'post_categories', 'services', 'destinations', 'testimonials', 'faqs'] as $t) {
             Db::exec("DROP TABLE IF EXISTS {$t}");
         }
+        Db::exec($sqlite ? 'PRAGMA foreign_keys = ON' : 'SET FOREIGN_KEY_CHECKS = 1');
 
         $tables = [
             'services'     => "slug VARCHAR(160) NOT NULL UNIQUE, title VARCHAR(160), tagline VARCHAR(255), summary TEXT, overview TEXT, icon TEXT, image VARCHAR(255), benefits TEXT, requirements TEXT, timeline TEXT, faqs TEXT, sort_order INT DEFAULT 0, is_published TINYINT DEFAULT 1, created_at VARCHAR(25), updated_at VARCHAR(25)",
