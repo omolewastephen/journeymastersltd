@@ -12,7 +12,11 @@ require BASE_PATH . '/app/Views/partials/page-hero.php';
   <div class="container article-wrap">
     <article class="prose article" data-reveal>
       <p class="article-meta"><?= e(date('F j, Y', strtotime($post['date']))) ?> · <?= e($post['read']) ?> read</p>
-      <?php foreach ($post['body'] as $para): ?><p><?= e($para) ?></p><?php endforeach; ?>
+      <?php if (is_array($post['body'])): ?>
+        <?php foreach ($post['body'] as $para): ?><p><?= e($para) ?></p><?php endforeach; ?>
+      <?php else: ?>
+        <?= $post['body'] /* admin-authored rich text */ ?>
+      <?php endif; ?>
       <div class="article-share">
         <a href="<?= e(biz('whatsapp')) ?>" target="_blank" rel="noopener" class="btn btn--primary magnetic">Talk to a consultant</a>
       </div>

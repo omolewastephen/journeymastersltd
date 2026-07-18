@@ -55,22 +55,15 @@ CREATE TABLE IF NOT EXISTS services (
     overview     MEDIUMTEXT NULL,
     icon         TEXT NULL,
     image        VARCHAR(255) NULL,
+    benefits     TEXT NULL,          -- JSON array of strings
+    requirements TEXT NULL,          -- JSON array of strings
+    timeline     TEXT NULL,          -- JSON array of {title, desc}
+    faqs         TEXT NULL,          -- JSON array of {q, a}
     sort_order   INT NOT NULL DEFAULT 0,
     is_published TINYINT(1) NOT NULL DEFAULT 1,
     created_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_services_slug (slug)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS service_features (
-    id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    service_id  INT UNSIGNED NOT NULL,
-    type        ENUM('benefit','requirement','timeline','faq') NOT NULL,
-    title       VARCHAR(200) NULL,
-    body        TEXT NULL,
-    sort_order  INT NOT NULL DEFAULT 0,
-    FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
-    INDEX idx_feature_service (service_id, type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS destinations (
@@ -81,45 +74,31 @@ CREATE TABLE IF NOT EXISTS destinations (
     intro        TEXT NULL,
     duration     VARCHAR(120) NULL,
     image        VARCHAR(255) NULL,
-    highlights   TEXT NULL,
-    requirements TEXT NULL,
+    highlights       TEXT NULL,      -- JSON array of strings
+    requirements     TEXT NULL,      -- JSON array of strings
+    related_services TEXT NULL,      -- JSON array of service slugs
+    gallery          TEXT NULL,      -- JSON array of image URLs
     sort_order   INT NOT NULL DEFAULT 0,
     is_published TINYINT(1) NOT NULL DEFAULT 1,
     created_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS galleries (
-    id             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    destination_id INT UNSIGNED NULL,
-    image          VARCHAR(255) NOT NULL,
-    caption        VARCHAR(200) NULL,
-    sort_order     INT NOT NULL DEFAULT 0,
-    FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS post_categories (
-    id    INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    slug  VARCHAR(120) NOT NULL UNIQUE,
-    name  VARCHAR(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE IF NOT EXISTS posts (
     id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    category_id  INT UNSIGNED NULL,
     author_id    INT UNSIGNED NULL,
     slug         VARCHAR(180) NOT NULL UNIQUE,
     title        VARCHAR(220) NOT NULL,
+    category     VARCHAR(120) NULL,
     excerpt      TEXT NULL,
-    body         MEDIUMTEXT NULL,
+    body         MEDIUMTEXT NULL,    -- HTML (rich text)
     image        VARCHAR(255) NULL,
     read_time    VARCHAR(20) NULL,
     is_published TINYINT(1) NOT NULL DEFAULT 1,
     published_at DATETIME NULL,
     created_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES post_categories(id) ON DELETE SET NULL,
-    FOREIGN KEY (author_id)   REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL,
     INDEX idx_posts_slug (slug),
     INDEX idx_posts_published (is_published, published_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

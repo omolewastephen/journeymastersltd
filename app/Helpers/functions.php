@@ -137,6 +137,47 @@ if (!function_exists('canonical_url')) {
     }
 }
 
+if (!function_exists('pub_pill')) {
+    function pub_pill(mixed $published): string
+    {
+        return ((int) $published) === 1
+            ? '<span class="pill pill--ok">Published</span>'
+            : '<span class="pill pill--muted">Draft</span>';
+    }
+}
+
+if (!function_exists('fv')) {
+    /** Escaped form value for admin edit forms (prefills from the record). */
+    function fv(?array $item, string $key, string $default = ''): string
+    {
+        return e((string) ($item[$key] ?? $default));
+    }
+}
+
+if (!function_exists('slugify')) {
+    function slugify(string $text): string
+    {
+        $text = strtolower(trim($text));
+        $text = preg_replace('/[^a-z0-9]+/', '-', $text) ?? '';
+        return trim($text, '-') ?: 'item';
+    }
+}
+
+if (!function_exists('media')) {
+    /** Resolve a stored image reference (full URL, root-relative, or an uploads/ path). */
+    function media(?string $path): string
+    {
+        $path = (string) $path;
+        if ($path === '') {
+            return '';
+        }
+        if (preg_match('#^(https?:)?//#', $path) || str_starts_with($path, '/')) {
+            return $path;
+        }
+        return url($path);
+    }
+}
+
 if (!function_exists('whatsapp_url')) {
     /** Prefill a WhatsApp message where the click-to-chat link supports it. */
     function whatsapp_url(string $text = ''): string

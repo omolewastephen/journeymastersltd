@@ -35,7 +35,11 @@
       "Bash(pkill -f \"php -S 127.0.0.1:80\")",
       "Read(//private/tmp/**)",
       "Bash(DB_CONNECTION=sqlite DB_ENABLED=true APP_DEBUG=true QA_LOGIN=1 php -S 127.0.0.1:8030 -t public public/index.php)",
-      "Bash(grep -Ei 'dev\\\\.sqlite|\\\\.env$|messages\\\\.json|subscribers\\\\.json')"
+      "Bash(grep -Ei 'dev\\\\.sqlite|\\\\.env$|messages\\\\.json|subscribers\\\\.json')",
+      "Bash(git commit -q -m 'feat\\(admin\\): Admin CMS core — auth, dashboard, messages inbox, subscribers *)",
+      "Bash(php -r '$p=new PDO\\(\"sqlite:storage/dev.sqlite\"\\); $p->exec\\(\"UPDATE services SET title=\\\\\"Proof of Funds [DB-EDITED]\\\\\" WHERE slug=\\\\\"proof-of-funds\\\\\"\"\\); $p->exec\\(\"UPDATE posts SET title=\\\\\"Canada Checklist [DB-EDITED]\\\\\" WHERE slug=\\\\\"canada-study-permit-2025-checklist\\\\\"\"\\); echo \"edited DB rows\\\\n\";')",
+      "Bash(DB_CONNECTION=sqlite DB_ENABLED=true APP_DEBUG=true php -S 127.0.0.1:8040 -t public public/index.php)",
+      "Bash(DB_CONNECTION=sqlite DB_ENABLED=true APP_DEBUG=true QA_LOGIN=1 php -S 127.0.0.1:8050 -t public public/index.php)"
     ]
   }
 }

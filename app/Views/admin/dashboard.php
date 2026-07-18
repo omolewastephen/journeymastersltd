@@ -23,6 +23,17 @@
   </div>
 </div>
 
+<div class="adm-panel adm-tools">
+  <div>
+    <h2>Content library</h2>
+    <p class="muted">Import the starter services, destinations, blog posts, testimonials &amp; FAQs into the database so you can edit them from the menu. Your leads and login are never touched.</p>
+  </div>
+  <form method="post" action="<?= url('/admin/tools/seed') ?>" data-confirm="Import starter content into the CMS tables? (Existing content entries are replaced; messages, subscribers and users are untouched.)">
+    <?= csrf_field() ?>
+    <button type="submit" class="btn-adm btn-adm--primary">Import / reset starter content</button>
+  </form>
+</div>
+
 <div class="adm-panel">
   <div class="adm-panel-head">
     <h2>Recent enquiries</h2>

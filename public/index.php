@@ -12,6 +12,9 @@ if (PHP_SAPI === 'cli-server') {
     }
 }
 
+// The public web root (this dir) — used for file uploads in either layout.
+define('WEBROOT', __DIR__);
+
 // Locate the application. Supports two deploy layouts:
 //  1. public/ is the web root, app/ lives one level up (recommended, local dev).
 //  2. Everything sits inside public_html together (flattened cPanel deploy).

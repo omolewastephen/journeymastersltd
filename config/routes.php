@@ -40,6 +40,24 @@ $router->post('/admin/subscribers/{id}/delete', 'Admin\SubscribersController@des
 $router->get('/admin/password', 'Admin\AccountController@edit');
 $router->post('/admin/password', 'Admin\AccountController@update');
 
+$router->post('/admin/tools/seed', 'Admin\ToolsController@seed');
+
+/* ---- Content managers (CRUD) ------------------------------------------- */
+foreach ([
+    'posts'        => 'PostsController',
+    'faqs'         => 'FaqsController',
+    'testimonials' => 'TestimonialsController',
+    'services'     => 'ServicesController',
+    'destinations' => 'DestinationsController',
+] as $res => $ctrl) {
+    $router->get("/admin/{$res}", "Admin\\{$ctrl}@index");
+    $router->get("/admin/{$res}/create", "Admin\\{$ctrl}@create");
+    $router->post("/admin/{$res}", "Admin\\{$ctrl}@store");
+    $router->get("/admin/{$res}/{id}/edit", "Admin\\{$ctrl}@edit");
+    $router->post("/admin/{$res}/{id}", "Admin\\{$ctrl}@update");
+    $router->post("/admin/{$res}/{id}/delete", "Admin\\{$ctrl}@destroy");
+}
+
 // SEO utilities
 $router->get('/sitemap.xml', 'PageController@sitemap');
 $router->get('/robots.txt', 'PageController@robots');
