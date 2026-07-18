@@ -1,0 +1,23 @@
+{
+    "name": "journeymasters/website",
+    "description": "Journey Masters Ltd — premium travel, study-abroad & visa consultancy website (PHP 8 MVC).",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1"
+    },
+    "suggest": {
+        "phpmailer/phpmailer": "SMTP delivery for the contact form (^6.9)"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Helpers/functions.php"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

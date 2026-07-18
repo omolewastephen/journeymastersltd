@@ -1,0 +1,14 @@
+---
+# cPanel Git Version Control deployment.
+# On every "Update from Remote" + "Deploy HEAD Commit", cPanel runs these tasks
+# as your account user. Flattens the app into public_html; app/config/database
+# stay protected by their own .htaccess deny rules.
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R public/. $DEPLOYPATH/
+    - /bin/cp -R app config database $DEPLOYPATH/
+    - /bin/cp -n .env.example $DEPLOYPATH/.env
+    - /bin/mkdir -p $DEPLOYPATH/storage $DEPLOYPATH/uploads
+    - /bin/chmod -R 775 $DEPLOYPATH/storage $DEPLOYPATH/uploads

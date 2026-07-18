@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pwd && echo \"--- working dir contents ---\" && ls -la /Users/user/Desktop/journeymastersltd 2>/dev/null && echo \"--- Desktop contents ---\" && ls -la /Users/user/Desktop 2>/dev/null | head -40)",
+      "Read(//Users/user/Desktop/**)",
+      "Read(//Users/user/Desktop/JML/**)",
+      "Read(//Users/user/Desktop/JML \\\\\\(2\\\\\\)/**)",
+      "Bash(mkdir -p public/assets/css public/assets/js public/assets/img)",
+      "Bash(cp assets/journey_master_logo.png public/assets/img/logo.png)",
+      "Bash(cp assets/white-logo.png public/assets/img/logo-white.png)",
+      "Bash(cp assets/map_bg.png public/assets/img/map.png)",
+      "Bash(open public/index.html)",
+      "Bash(command -v node)",
+      "Bash(node --check public/assets/js/app.js)",
+      "Bash(python3 - /private/tmp/claude-501/-Users-user-Desktop-journeymastersltd/d399a0e7-46ba-42a4-9f17-53372f8234ea/scratchpad)",
+      "Bash(php -S 127.0.0.1:8010 -t public public/index.php)",
+      "Bash(php -r ' *)",
+      "Bash(php -r '$f=\"storage/messages.json\"; if\\(is_file\\($f\\)\\){ $d=json_decode\\(file_get_contents\\($f\\),true\\); echo count\\($d\\).\" message\\(s\\) stored. Last: \".json_encode\\(end\\($d\\),JSON_PRETTY_PRINT\\); } else echo \"NOT created\";')",
+      "Bash(php -r '$c=stream_context_create\\([\"http\"=>[\"ignore_errors\"=>true]]\\); $b=@file_get_contents\\(\"http://127.0.0.1:8010/\",false,$c\\); echo \"home: \".\\($http_response_header[0]??\"no resp\"\\).\" \\(\".strlen\\(\\(string\\)$b\\).\"B\\)\\\\n\";')",
+      "Bash(git config *)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(grep -Ei 'JOURNEY MASTER LTD.txt|\\\\.env$|passwords')"
+    ]
+  }
+}

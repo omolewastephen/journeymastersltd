@@ -1,0 +1,18 @@
+# Dependencies
+/vendor/
+
+# Environment & secrets
+/.env
+
+# Runtime data (keep .htaccess + .gitkeep, ignore generated files)
+/storage/*.json
+/storage/logs/*.log
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Source scratch — NOT part of the deployable app, and contains credentials.
+/assets/
+
+# OS / editor
+.DS_Store
+Thumbs.db
