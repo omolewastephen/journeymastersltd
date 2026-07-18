@@ -231,10 +231,10 @@ INSERT INTO roles (name, label) VALUES
 ON DUPLICATE KEY UPDATE label = VALUES(label);
 
 -- Default admin — CHANGE THIS PASSWORD immediately after first login.
--- Hash below is password_hash('ChangeMe!2025', PASSWORD_DEFAULT).
+-- Hash below is password_hash('JourneyMasters@2026', PASSWORD_DEFAULT).
 INSERT INTO users (role_id, name, email, password)
 SELECT r.id, 'Site Administrator', 'admin@journeymastersltd.com',
-       '$2y$10$e0MYzXyjpJS7Pd0RVvHwHe1HlUq9x1p1x4kQG5uJ5s6hQnJ5w3Q0G'
+       '$2y$12$9QMo/krM8v5vHohaDTNOO.5YN6ZcjBEn25Vs8sJRAR.CtTBO.B01K'
 FROM roles r WHERE r.name = 'super_admin'
 ON DUPLICATE KEY UPDATE email = email;
 
